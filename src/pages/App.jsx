@@ -7,7 +7,7 @@ import {
 
 import { Global } from '@emotion/core';
 
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import reset from './styles/Reset';
 
@@ -33,18 +33,10 @@ import PageLayout from './styles/PageLayout';
 
 import AuthRoute from '../components/AuthRoute';
 
-import { loadItem } from '../services/storage';
-
-import { setUser } from '../redux/slice';
-
 function App() {
-  const dispatch = useDispatch();
-
-  const user = loadItem('user');
-
-  if (user) {
-    dispatch(setUser({ uid: user }));
-  }
+  const { user } = useSelector((state) => ({
+    user: state.user,
+  }));
 
   return (
     <PageLayout>
